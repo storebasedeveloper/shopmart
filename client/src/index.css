@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .hoverEffect {
+    @apply duration-300 cursor-pointer;
+  }
+  .headerSedenavLi {
+    @apply hover:underline underline-offset-2 cursor-pointer text-gray-300 hover:text-white;
+  }
+}
+
+/* ============= NavLink active Start here ============== */
+nav .active li {
+  color: black;
+  font-weight: 600;
+  text-decoration: 1px underline black;
+}
+
+@media screen and (max-width: 665px) {
+  nav .active li {
+    color: white;
+    font-weight: 600;
+    text-decoration: 1px underline white;
+  }
+}
+.shopmart-logo{
+  color: white;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font: 5rem;
+
+  font-size: 1.3rem;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.register-avatar{
+  padding: 2%;
+}
+.flutterwave{
+width: 25%;
+height: 20%;
+}
+.flutterwave-boss{
+  padding: 3%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.payment-options{
+  width: 10%;
+}
+.newsletter-button{
+  padding: 3%;
+  color: white;
+  background-color: black;
+}
+.newsletter-button:hover{
+  color: black;
+  background-color: white;
+  border: 0.5px solid black;
+}
+/* ============= NavLink active End here ================ */

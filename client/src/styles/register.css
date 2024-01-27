@@ -1,0 +1,19 @@
+input[type="file"]{
+    display: none;
+}
+.profile-input{
+    font-size: 1rem;
+}
+.profile-img{
+width : 7%;
+border-radius: 50%;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
