@@ -181,7 +181,7 @@ const uploadImages = async(req, res) => {
     const {id}  = req.params
 validateMongodbid(id)
 try{
-const uploader = (path) => cloudinaryUpload(path, "products" )
+const uploader = (path) => cloudinaryUpload(path, "shopmart-products" )
 const urls = []
 const files = req.files;
 for( const file of files){

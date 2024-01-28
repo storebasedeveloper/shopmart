@@ -1,5 +1,6 @@
 const path = require("path")
 const express = require("express")
+const { localVariables } = require("../middlewares/authMiddleware")
 const { authMiddleware, isAdmin } = require(path.join(__dirname, "..", "middlewares", "authMiddleware.js"))
 const {
       createUser,
@@ -24,7 +25,12 @@ const {
       applyCoupon,
       createOrder,
       getOrders,
-      updateOrderStatus
+      updateOrderStatus,
+      generateOTP,
+      verifyOTP,
+      createResetSession,
+      otpResetPassword,
+      verifyUser
     } = require(path.join(__dirname, "..", "controllers", "userCtrl.js"))
 const router = express.Router()
 router.post("/register", createUser)
@@ -41,6 +47,10 @@ router.get("/refresh", handleRefreshToken)
 router.get("/all-users", getAllUsers)
 router.get("/get-orders", authMiddleware, getOrders)
 router.get("/logout", logout)
+router.get("/generateOTP", verifyUser, localVariables,  generateOTP)
+router.get("/verifyOTP", verifyOTP)
+router.get("/createResetSession", createResetSession)
+
 router.delete("/empty-cart", authMiddleware, emptyCart)
 router.delete("/:id", deleteAUser)
 router.get("/cart",  authMiddleware, getUserCart)
@@ -50,4 +60,5 @@ router.put("/edit-user", authMiddleware, updateAUser)
 router.put("/save-address", authMiddleware, saveAddress)
 router.put("/block-user/:id", authMiddleware, isAdmin, blockUser)
 router.put("/unblock-user/:id", authMiddleware, isAdmin, unblockUser)
+router.put("/otpResetPassword", verifyUser, otpResetPassword)
 module.exports = router

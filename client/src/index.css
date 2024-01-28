@@ -64,4 +64,8 @@ height: 20%;
   background-color: white;
   border: 0.5px solid black;
 }
+.headers-title{
+  font-size: 2rem;
+  font-weight: 700;
+}
 /* ============= NavLink active End here ================ */

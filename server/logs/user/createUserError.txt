@@ -1,0 +1,7 @@
+20240127	23:42:33	7ab157e7-3181-41f4-adae-00534229603d	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "07014013006" }
+20240127	23:42:45	1a0b3922-48f5-4137-9177-47db3d895272	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "07014013006" }
+20240127	23:57:23	ecc7a2a5-054a-4686-b163-80ffa481c5c7	MongoServerSelectionError: getaddrinfo ENOTFOUND ac-mmfew6n-shard-00-02.hu50gae.mongodb.net
+20240128	00:08:19	ccbd38dc-ee84-41f4-ace1-99145bb7a3c7	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "070140130069" }
+20240128	00:09:02	e4dc6518-07be-49b4-a2a2-694778dcaf1e	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "070140130069" }
+20240128	08:03:12	9ea138ef-1bce-43a8-acd9-b3a099bd964a	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "0701401300699" }
+20240128	08:08:52	383455cd-58c8-451c-a169-e3fb95f69602	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "070140130069995" }

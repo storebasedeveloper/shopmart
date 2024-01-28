@@ -4,8 +4,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { profileValidation } from "../../helper/validate";
 import convertToBase64 from '../../helper/convert';
-import styles from '../styles/Username.module.css';
-import extend from '../styles/Profile.module.css'
+import styles from "../../styles/username.module.css"
+import extend from '../../styles/profile.module.css'
 
 export default function Profile() {
 

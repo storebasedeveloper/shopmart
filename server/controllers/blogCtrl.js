@@ -133,7 +133,7 @@ const uploadImages = async(req, res) => {
     const {id}  = req.params
     validateMongoDbId(id)
 try{
-const uploader = (path) => cloudinaryUpload(path, "blogs" )
+const uploader = (path) => cloudinaryUpload(path, "shopmart-blogs" )
 const urls = []
 const files = req.files;
 for( const file of files){

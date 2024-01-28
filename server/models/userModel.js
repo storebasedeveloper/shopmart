@@ -30,6 +30,9 @@ const userSchema = new mongoose.Schema({
         type:String,
         default : ""
     },
+    ipAddress : {
+        type : String
+    },
     passwordChangedAt : Date,
     passwordResetToken : String,
     passwordResetExpires : Date,

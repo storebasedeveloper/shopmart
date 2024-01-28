@@ -32,4 +32,11 @@ if(adminUser.role !== "admin"){
     next()
 }
 }
-module.exports = { authMiddleware, isAdmin }
+const localVariables = (req, res, next) => {
+    req.app.locals = {
+        OTP : null,
+        resetSession : false
+    }
+    next()
+}
+module.exports = { authMiddleware, isAdmin, localVariables }

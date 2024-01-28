@@ -13,9 +13,11 @@ const Product = require(path.join(__dirname, "..", "models", "productModel.js"))
 const Order = require(path.join(__dirname, "..", "models", "orderModel.js"))
 const sendEmail = require(path.join(__dirname, "..", "controllers", "emailCtrl.js"))
 const uniqid = require('uniqid'); 
+const otpGenerator = require("otp-generator")
+const { log } = require("console")
 //Register A User
 const createUser = async (req, res) => {
-const {firstname, lastname, email, mobile, password, role} = req.body;
+const {firstname, lastname, email, mobile, password, role, profile} = req.body;
     const user = req.body.email
     if(!user){
         return res.json({"message": "Enter your email", "success": false})
@@ -31,7 +33,9 @@ const {firstname, lastname, email, mobile, password, role} = req.body;
     email,
     mobile,
     password: hashedPwd,
-    role
+    role,
+    profile : profile,
+    ipAddress : req.header('x-forwarded-for') || req.socket.remoteAddress
   }
   );
   const data = {
@@ -66,6 +70,7 @@ sendEmail(data)
 
     }
 }catch(error){
+    console.log(error)
     logEvents(`${error.name}: ${error.message}`, "createUserError.txt", "user")
 
 }
@@ -196,13 +201,71 @@ catch(error){
     console.log(error)
 }
 }
+ async function verifyUser (req, res, next){
+    try {
+        
+        const { email } = req.method == "GET" ? req.query : req.body;
+
+        // check the user existance
+        let exist = await User.findOne({ email });
+        if(!exist) return res.status(404).send({ error : "Can't find User!"});
+        next();
+
+    } catch (error) {
+        console.log(error)
+        return res.status(404).send({ error: "Authentication Error"});
+    }
+}
+const generateOTP = async (req, res) => {
+
+req.app.locals.OTP = await otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false, lowerCaseAlphabets : false });
+res.status(201).json({code : req.app.locals.OTP})
+}
+const verifyOTP = (req, res) => {
+    const {code} =req.query;
+    console.log(code);
+    if(parseInt(req.app.locals.OTP) == parseInt(code)){
+        req.app.locals.OTP = null //reset otp value
+        req.app.locals.resetSession = true
+        return res.status(201).json({"msg" : "verify successfull"})
+    }
+    return res.status(400).json({"error" : "Invalid OTP"})
+}
+const createResetSession= (req, res) => {
+    if(req.app.locals.resetSession){
+        req.app.locals.resetSession = false //allow access to this route only once
+        return res.status(440).json({"msg" : "Access Granted"})
+    }
+    return res.status(440).json({"error" : "session expired"})
+    
+}
+const otpResetPassword= async (req, res) => {
+    if(!req.app.locals.resetSession) return res.status(440).json({"error" : "session expired"})
+    const {email, password} = req.body;
+    try{
+const user = await User.findOne({email})
+if(!user){
+    return res.status(404).json({"msg" : "user does not exist"})
+}
+console.log(user)
+const hashedPwd = await bcrypt.hash(password, 10);
+user.password = hashedPwd;
+await user.save();
+req.app.locals.resetSession = false
+console.log("Gideon")
+res.status(201).json({"msg" : "Record updated"})
+    }catch(error){
+console.log(error)
+    }
+}
 //Get a single user
 const getAUser = async (req, res) => {
     const { id } = req.params;
     validateMongoDbId(id);
 try{
 const gotUser = await User.findById(id)
-res.json({gotUser});
+const {password, ...rest} = Object.assign({}, gotUser.toJSON())
+res.json(rest);
 }catch(error){
     logEvents(`${error.name}: ${error.stack}`, "getAUserError.txt", "user")
 }
@@ -229,6 +292,7 @@ firstname:req?.body?.firstname,
 lastname: req?.body?.lastname,
 email :req?.body?.email,
 mobile :req?.body?.mobile,
+profile :req?.body?.profile,
     },
     {
         new : true
@@ -551,4 +615,9 @@ emptyCart,
 applyCoupon,
 createOrder,
 getOrders,
-updateOrderStatus}
+updateOrderStatus,
+generateOTP,
+verifyOTP,
+createResetSession,
+otpResetPassword, 
+verifyUser}

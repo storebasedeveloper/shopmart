@@ -9,7 +9,7 @@ const getStaticImages = (req, res) => {
        
        cloudinary.api.resources({
          type: 'upload',
-         prefix: 'file-upload/Home-page' // add your folder
+         prefix: 'shopmart-banner' // add your folder
        },
          function(error, result)
           { 
@@ -19,7 +19,7 @@ const getStaticImages = (req, res) => {
               return res.status(400).json({"message": "connect to the internet"})
               }else{
                 const imageUrls = result.resources.map((element) => element.url);
-             return    res.status(200).json(imageUrls);
+             return res.status(200).json(imageUrls);
               }
             });
 }
