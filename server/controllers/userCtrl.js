@@ -18,10 +18,6 @@ const { log } = require("console")
 //Register A User
 const createUser = async (req, res) => {
 const {firstname, lastname, email, mobile, password, role, profile} = req.body;
-const existMobile = await User.findOne({mobile : mobile})
-if(existMobile !== ""){
-    return res.json({"msg" : "Mobile number already exist"})
-}
     const user = req.body.email
     if(!user){
         return res.status(400).json({"message": "Enter your email", "success": false})
@@ -77,6 +73,7 @@ sendEmail(data)
 }catch(error){
     console.log(error)
     logEvents(`${error.name}: ${error.message}`, "createUserError.txt", "user")
+    return res.status(500).json({"message": "Internal server Error", "success": false})
 
 }
 }
@@ -89,7 +86,7 @@ const loginUser = async (req,res)=> {
     try{
         const foundUser = await User.findOne({ email })
         if(!foundUser) {
-            return res.status(401).json({"msg": "User does not exist", "success" : false})  //unAuthorized
+            return res.status(400).json({"msg": "User does not exist", "success" : false})  //unAuthorized
            } 
            const match = await bcrypt.compare(password, foundUser.password);
         if(foundUser && match){

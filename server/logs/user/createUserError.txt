@@ -7,3 +7,7 @@
 20240128	08:08:52	383455cd-58c8-451c-a169-e3fb95f69602	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "070140130069995" }
 20240128	15:44:47	08017cd2-c7dd-4295-bb95-f530c6d01536	MongooseError: Operation `users.findOne()` buffering timed out after 10000ms
 20240128	16:12:55	2bdf6a10-875c-4ffa-a556-b05ab781131d	MongooseError: Operation `users.findOne()` buffering timed out after 10000ms
+20240128	19:20:06	8329d917-8289-4815-ab26-9bc276bfde44	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "2345678" }
+20240128	19:44:21	4fc1b4f8-1b8b-42f1-9b11-4b16a53a4327	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "12345678" }
+20240128	19:44:23	f15a2cfe-ab54-4eaa-8482-8f8e4b735a66	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "12345678" }
+20240128	19:44:40	a3c1e148-a33b-4621-9903-9f72000b0fac	MongoServerError: E11000 duplicate key error collection: genzshop.users index: mobile_1 dup key: { mobile: "12345678" }

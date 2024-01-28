@@ -1,6 +1,7 @@
 const path = require("path")
 const Coupon = require(path.join(__dirname,  "..", "models", "couponModel.js"))
 const validateMongodbId = require(path.join(__dirname, "..", "utils", "validateMongodbId"))
+console.log(validateMongodbId)
 const { logEvents }= require(path.join(__dirname, "..","middlewares", "logEvents.js"))
 const createCoupon = async(req, res) => {
 try{
