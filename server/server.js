@@ -40,3 +40,23 @@ app.use(errorHandler)
 app.listen(PORT, ()=>{
     console.log("Your server is runnung on port 5000")
 })
+
+
+// const start = async () => {
+//   try {
+//     await connectDB(process.env.MONGODB_URI)
+//     .then(()=>{
+//       console.log("connected to database successfully")
+//     })
+//     .catch((error)=>{
+//       console.log(error)
+//     })
+//     app.listen(PORT, () =>
+//       console.log(`Server is listening on port ${PORT}...`)
+//     );
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// start();

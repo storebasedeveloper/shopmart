@@ -1,17 +1,35 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik"
 import convertToBase64 from "../../helper/convert";
 import "../../styles/register.css"
 import avatar from "../../assets/images/profile.png"
 import { registerValidation } from "../../helper/validate";
 import { Toaster } from "react-hot-toast";
+import axios from "axios"
+
 
 
 
 const SignUp = () => {
+  const history = useNavigate()
   const [file, setFile] = useState()
+  const sendRequest = async(values) => {
+    const response = axios.post("http://localhost:5000/api/user/register", {
+      firstname : values.firstname,
+      lastname : values.lastname,
+      mobile : values.phoneNumber,
+      email : values.email,
+      password : values.password,
+      zipcode : values.zipcode,
+      address : values.address,
+      profile : file
+    }).catch((error) => {
+      console.log(error)
+    })
+ return response
+  } 
   const formik = useFormik({
     initialValues : {
       email : "",
@@ -27,10 +45,13 @@ const SignUp = () => {
     validateOnChange : false,
    onSubmit : async (values) =>{
     values = await Object.assign(values, {profile : file || ""})
-    console.log(values)
+    sendRequest(values).then(()=>{
+      history("/signin")
+    })
     }
   })
   const onUpload = async(e)=>{
+    console.log(e.target.values)
 const base64 = await convertToBase64(e.target.files[0])
 setFile(base64)
 console.log(base64)

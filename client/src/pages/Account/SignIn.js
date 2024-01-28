@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik"
 import { totalValidate } from "../../helper/validate";
 import { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 const SignIn = () => {
+  const history = useNavigate()
   const formik = useFormik({
     initialValues : {
       email : "",
@@ -15,9 +18,19 @@ const SignIn = () => {
     validateOnBlur : false,
     validateOnChange : false,
    onSubmit : async (values) =>{
-    console.log(values)
+    sendRequest(values).then(()=> history("/"))
     }
   })
+  const sendRequest = async(values) => {
+    const response = axios.post("", {
+      email : values.email,
+      password : values.password,
+    }).catch((error) => {
+      console.log(error)
+    })
+    const data = await response.data;
+    return data
+  }
   return (
     <div className="w-full h-screen flex items-center justify-center">
         <Toaster position="top-center" reverseOrder={false}></Toaster>
@@ -45,10 +58,10 @@ const SignIn = () => {
             </span>
             <p className="text-base text-gray-300">
               <span className="text-white font-semibold font-titleFont">
-                Access all OREBI services
+                Access all SHOPMART services
               </span>
               <br />
-              Enjoy access to a diverse array of OREBI services tailored to enhance your online shopping experience. From personalized recommendations to secure payment options, we've got you covered.
+              Enjoy access to a diverse array of SHOPMART services tailored to enhance your online shopping experience. From personalized recommendations to secure payment options, we've got you covered.
             </p>
           </div>
           <div className="w-[300px] flex items-start gap-3">
@@ -66,7 +79,7 @@ const SignIn = () => {
           <div className="flex items-center justify-between mt-10">
             <Link to="/">
               <p className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300">
-                © OREBI
+                © SHOPMART
               </p>
             </Link>
             <p className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300">

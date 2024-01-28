@@ -18,9 +18,13 @@ const { log } = require("console")
 //Register A User
 const createUser = async (req, res) => {
 const {firstname, lastname, email, mobile, password, role, profile} = req.body;
+const existMobile = await User.findOne({mobile : mobile})
+if(existMobile !== ""){
+    return res.json({"msg" : "Mobile number already exist"})
+}
     const user = req.body.email
     if(!user){
-        return res.json({"message": "Enter your email", "success": false})
+        return res.status(400).json({"message": "Enter your email", "success": false})
     }
     try{
     const foundUser = await User.findOne({email : user})
@@ -62,8 +66,9 @@ const {firstname, lastname, email, mobile, password, role, profile} = req.body;
 }
 sendEmail(data)
   res.status(201).json(newUser)
-    }else{
-        res.json({
+    }
+    else{
+        res.status(200).json({
             "msg" : "user already exists",
             "success" : false
         })

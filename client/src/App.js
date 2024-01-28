@@ -45,7 +45,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/" element={<Layout />}>
         {/* ==================== Header Navlink Start here =================== */}
-        <Route index element={<Home />}></Route>
+        <Route  path = "/home" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
@@ -58,7 +58,7 @@ const router = createBrowserRouter(
         <Route path="/paymentgateway" element={<Payment />}></Route>
         
       </Route>
-      <Route path="/signup" element={<SignUp />}></Route>
+      <Route index element={<SignUp />}></Route>
       <Route path="/signin" element={<SignIn />}></Route>
       <Route path="/recovery" element={<Recovery />}></Route>
       <Route path="/profile" element={<Profile />}></Route>

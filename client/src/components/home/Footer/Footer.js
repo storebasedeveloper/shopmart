@@ -11,6 +11,7 @@ import amexcard from "../../../../src/assets/images/svg/amexcard.svg"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { Link } from "react-router-dom";
 const Footer = () => {
   const [email, setEmail] = useState("");
   const showToastMessage = () => {
@@ -151,7 +152,7 @@ const Footer = () => {
           <FooterListTitle title="Your account" />
           <ul className="flex flex-col gap-2">
             <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Profile
+            <Link to="/profile"> Profile</Link>
             </li>
             <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
               Orders
